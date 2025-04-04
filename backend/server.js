@@ -1,8 +1,8 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const profileRoutes = require('./routes/profile');
+const lfgRoutes = require('./routes/lfgRoutes'); 
 require('dotenv').config();
 
 const app = express();
@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/profile', profileRoutes);
+app.use('/api/lfg', lfgRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {

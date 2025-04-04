@@ -20,7 +20,7 @@
 /* Title */
 .auth-box h2 {
   margin-bottom: 1.5rem;
-  color: #4CAF50;
+  color: #5C02A1;
 }
 
 /* Input Fields */
@@ -35,7 +35,7 @@
 
 /* Button */
 .auth-box button {
-  background-color: #4CAF50;
+  background-color: #5C02A1;
   color: white;
   padding: 12px;
   width: 100%;
@@ -47,17 +47,23 @@
 }
 
 .auth-box button:hover {
-  background-color: #45a049;
+  background-color: #c1abd1;
 }
 
 /* Links */
 .auth-box a {
-  color: #4CAF50;
+  color: #5C02A1;
   text-decoration: none;
 }
 
 .auth-box a:hover {
   text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
 }
 
 /* Responsive */

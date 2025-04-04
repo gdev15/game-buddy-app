@@ -4,8 +4,10 @@ import './Profile.css';
 import Header from './Header';
 import Footer from './Footer';
 
+import { auth } from '../firebase';
+
 const ProfilePage = () => {
-  const userId = "123456"; // Replace with Firebase UID or however you're tracking users
+  const userId = auth.currentUser?.uid
 
   const [profile, setProfile] = useState({
     username: '',

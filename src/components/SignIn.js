@@ -27,7 +27,9 @@ const SignIn = () => {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h2>Welcome Back!</h2>
+        <h2>Welcome to Gaming Buddy!</h2>
+        <h3>Sign Up / Log In</h3>
+        <p>To access all the features</p>
         <form onSubmit={handleSignIn}>
           <input 
             type="email" 
