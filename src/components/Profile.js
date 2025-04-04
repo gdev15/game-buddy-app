@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Profile.css';
+import Header from './Header';
+import Footer from './Footer';
 
 const ProfilePage = () => {
   const userId = "123456"; // Replace with Firebase UID or however you're tracking users
@@ -55,58 +57,64 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="profile-page">
-      <h2>User Profile</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input
-            name="username"
-            value={profile.username}
-            onChange={handleChange}
-            placeholder="GamerTag"
-          />
-        </label>
+    <>
+      <Header />
+      <div className="profile-page">
+        <h2>User Profile</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Username:
+            <input
+              name="username"
+              value={profile.username}
+              onChange={handleChange}
+              placeholder="GamerTag"
+            />
+          </label>
 
-        <label>
-          Favorite Games:
-          <input
-            name="favoriteGames"
-            value={profile.favoriteGames}
-            onChange={handleChange}
-            placeholder="Comma separated (e.g. Halo, COD, Overwatch)"
-          />
-        </label>
+          <label>
+            Favorite Games:
+            <input
+              name="favoriteGames"
+              value={profile.favoriteGames}
+              onChange={handleChange}
+              placeholder="Comma separated (e.g. Halo, COD, Overwatch)"
+            />
+          </label>
 
-        <label>
-          Skill Level:
-          <select
-            name="skillLevel"
-            value={profile.skillLevel}
-            onChange={handleChange}
-          >
-            <option value="">Select</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Pro">Pro</option>
-          </select>
-        </label>
+          <label>
+            Skill Level:
+            <select
+              name="skillLevel"
+              value={profile.skillLevel}
+              onChange={handleChange}
+            >
+              <option value="">Select</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Pro">Pro</option>
+            </select>
+          </label>
 
-        <label>
-          Availability:
-          <input
-            name="availability"
-            value={profile.availability}
-            onChange={handleChange}
-            placeholder="e.g. Mon-Fri 6pm-10pm"
-          />
-        </label>
+          <label>
+            Availability:
+            <input
+              name="availability"
+              value={profile.availability}
+              onChange={handleChange}
+              placeholder="e.g. Mon-Fri 6pm-10pm"
+            />
+          </label>
 
-        <button type="submit">Save Profile</button>
-      </form>
+          <button type="submit">Save Profile</button>
+        </form>
 
-      {statusMsg && <p>{statusMsg}</p>}
-    </div>
+        {statusMsg && <p>{statusMsg}</p>}
+      </div>
+      <Footer />
+    
+    </>
+    
   );
 };
 

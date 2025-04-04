@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
 
 const Dashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,31 +12,17 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard">
+    <>
+       <div className="dashboard">
       {/* Header */}
-      <header className="dashboard-header">
-        <div className="hamburger" onClick={toggleMenu}>
-          ☰
-        </div>
-      </header>
-
-      {/* Sidebar */}
-      <aside className={`dashboard-sidebar ${menuOpen ? 'open' : ''}`}>
-        <ul>
-          <li><Link to="/profile">Profile</Link></li>
-          <li>Friends</li>
-          <li>Messages</li>
-          <li>LFG</li>
-        </ul>
-      </aside>
-
+      <Header />
       {/* Main Content */}
       <main className="dashboard-content">
         <section>
           <h2>Welcome to Gaming Buddy!</h2>
           <p>Find players and join games easily.</p>
         </section>
-
+  
         <section className="dashboard-cards">
           <div className="card">
             <h3>Active Players</h3>
@@ -50,7 +38,14 @@ const Dashboard = () => {
           </div>
         </section>
       </main>
-    </div>
+
+        {/* Footer Navigation */}
+      <Footer />
+      </div>
+    
+    </>
+
+   
   );
 };
 

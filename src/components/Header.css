@@ -1,0 +1,32 @@
+/* Header */
+.dashboard-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    background-color: #160821;
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  /* Hamburger Menu */
+  .logo {
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+  
+  .hamburger {
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+  
+  /* Logo */
+  .logo-img {
+    height: 40px;
+    margin-right: 10px;
+  }
