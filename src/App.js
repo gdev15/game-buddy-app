@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
 import SignupConfirmation from './components/SignupConfirmation'; 
 import LfgPage from './components/LfgPage';
+import MyPostsPage from './components/MyPostsPage';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/lfg" element={<LfgPage />} />
+        <Route path="/myposts" element={<MyPostsPage />} />
       </Routes>
     </Router>
   );

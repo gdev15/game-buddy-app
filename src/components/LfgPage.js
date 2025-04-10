@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './LfgPage.css';
 import Header from './Header';
 import Footer from './Footer';
+import { auth } from '../firebase';
 
 const LfgPage = () => {
   const [formData, setFormData] = useState({
@@ -14,8 +15,37 @@ const LfgPage = () => {
   });
 
   const [lfgPosts, setLfgPosts] = useState([]);
+  const [userId, setUserId] = useState('');
+  const [username, setUsername] = useState('Anonymous');
 
-  // 🔁 Fetch existing posts on component mount
+  // Get logged-in user's UID
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        setUserId(user.uid);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Fetch username from MongoDB after userId is set
+  useEffect(() => {
+    if (userId) {
+      fetch(`http://localhost:5000/api/profile/${userId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data?.username) {
+            setUsername(data.username);
+          }
+        })
+        .catch(err => {
+          console.error('Failed to fetch username from MongoDB:', err);
+        });
+    }
+  }, [userId]);
+
+  // Fetch existing LFG posts
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -46,16 +76,16 @@ const LfgPage = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          userId,
+          username
+        })
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to post LFG.');
-      }
+      if (!response.ok) throw new Error('Failed to post LFG.');
 
       const newPost = await response.json();
-      console.log('LFG post successful:', newPost);
-
       alert('Post created successfully!');
 
       setFormData({
@@ -67,7 +97,6 @@ const LfgPage = () => {
         description: '',
       });
 
-      // ⬇️ Add new post to the top of the list
       setLfgPosts((prevPosts) => [newPost, ...prevPosts]);
     } catch (err) {
       console.error(err);
@@ -75,13 +104,99 @@ const LfgPage = () => {
     }
   };
 
+  const handleRequestToJoin = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/lfg/${postId}/request`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId,
+          username
+        })
+      });
+
+      console.log("Sending post:", {
+        ...formData,
+        userId,
+        username
+      });
+
+      if (!response.ok) throw new Error('Failed to request to join');
+      alert('Request sent successfully!');
+    } catch (error) {
+      console.error(error);
+      alert('There was an error sending your request.');
+    }
+  };
+
+  // Filter State
+  const [filters, setFilters] = useState({
+    game: '',
+    platform: '',
+    skillLevel: '',
+    region: ''
+  });
+
+  const handleFilterChange = (e) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value
+    });
+  };
+  
+  const filteredPosts = lfgPosts.filter(post => {
+    return (
+      (filters.game === '' || post.game.toLowerCase().includes(filters.game.toLowerCase())) &&
+      (filters.platform === '' || post.platform.toLowerCase().includes(filters.platform.toLowerCase())) &&
+      (filters.skillLevel === '' || post.skillLevel.toLowerCase().includes(filters.skillLevel.toLowerCase())) &&
+      (filters.region === '' || post.region.toLowerCase().includes(filters.region.toLowerCase()))
+    );
+  });
+
   return (
+    
     <div className="lfg-page">
       <Header />
       <main className="lfg-content">
+        <h2>Welcome {username}!</h2>
         <h2>Looking For Group (LFG)</h2>
         <p>Create a listing to find teammates or browse existing posts!</p>
 
+        {/* Filter Bar */}
+        <div className="filter-bar">
+          <input
+            type="text"
+            name="game"
+            placeholder="Filter by Game"
+            value={filters.game}
+            onChange={handleFilterChange}
+          />
+          <input
+            type="text"
+            name="platform"
+            placeholder="Filter by Platform"
+            value={filters.platform}
+            onChange={handleFilterChange}
+          />
+          <input
+            type="text"
+            name="skillLevel"
+            placeholder="Filter by Skill"
+            value={filters.skillLevel}
+            onChange={handleFilterChange}
+          />
+          <input
+            type="text"
+            name="region"
+            placeholder="Filter by Region"
+            value={filters.region}
+            onChange={handleFilterChange}
+          />
+        </div>
+
+        {/* LFG Posting Form */}
         <form className="lfg-form" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -133,19 +248,21 @@ const LfgPage = () => {
           <button type="submit">Post LFG</button>
         </form>
 
-        {/* ✅ Render the posts here */}
+        {/* Render the posts here */}
         <section className="lfg-listings">
           <h3>Group Listings</h3>
           {lfgPosts.length === 0 ? (
             <p>No posts yet.</p>
           ) : (
-            lfgPosts.map((post, index) => (
+            filteredPosts.map((post, index) => (
               <div className="lfg-card" key={index}>
-                <h4>{post.game} ({post.platform})</h4>
+                 <h4>{post.game} ({post.platform})</h4>
                 <p><strong>Skill:</strong> {post.skillLevel}</p>
                 <p><strong>Region:</strong> {post.region}</p>
                 <p><strong>Availability:</strong> {post.availability}</p>
+                <p><strong>Posted by:</strong> {post.username}</p>
                 <p><em>{post.description}</em></p>
+                <button onClick={() => handleRequestToJoin(post._id)}>Request to Join</button>
               </div>
             ))
           )}
