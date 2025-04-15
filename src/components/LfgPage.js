@@ -160,11 +160,11 @@ const LfgPage = () => {
     <div className="lfg-page">
       <Header />
       <main className="lfg-content">
-        <h2>Welcome {username}!</h2>
-        <h2>Looking For Group (LFG)</h2>
+        <h2>Welcome to LFG {username}!</h2>
         <p>Create a listing to find teammates or browse existing posts!</p>
-
+        <div className="divider"></div>
         {/* Filter Bar */}
+        <h3>Filter</h3>
         <div className="filter-bar">
           <input
             type="text"
@@ -195,7 +195,8 @@ const LfgPage = () => {
             onChange={handleFilterChange}
           />
         </div>
-
+        <div className="divider"></div>
+        <h3>Create LFG Post</h3>
         {/* LFG Posting Form */}
         <form className="lfg-form" onSubmit={handleSubmit}>
           <input
@@ -247,9 +248,10 @@ const LfgPage = () => {
           ></textarea>
           <button type="submit">Post LFG</button>
         </form>
-
+        
         {/* Render the posts here */}
         <section className="lfg-listings">
+        <div className="divider"></div>
           <h3>Group Listings</h3>
           {lfgPosts.length === 0 ? (
             <p>No posts yet.</p>

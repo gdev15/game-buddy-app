@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { auth } from '../firebase';
+import "./MyPostsPage.css"
+import { Link } from 'react-router-dom';
 
 const MyPostsPage = () => {
   const [userId, setUserId] = useState('');
@@ -75,7 +77,12 @@ const MyPostsPage = () => {
                     <strong>Accepted Members:</strong>
                     <ul>
                       {acceptedRequests.map((acc, idx) => (
-                        <li key={idx}>{acc.username}</li>
+                        <li key={idx}>
+                          {acc.username}{' '}
+                          <Link to={`/messages/${acc.userId}`}>
+                            <button>Message</button>
+                          </Link>
+                        </li>
                       ))}
                     </ul>
                   </div>

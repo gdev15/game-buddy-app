@@ -11,9 +11,9 @@ const Footer = () => {
       <div className="footer-item">
         <Link to="/profile"><span role="img" aria-label="profile">👤</span><p>Profile</p></Link>
       </div>
-      <div className="footer-item">
+      {/* <div className="footer-item">
         <Link to="/friends"><span role="img" aria-label="friends">👥</span><p>Friends</p></Link>
-      </div>
+      </div> */}
       <div className="footer-item">
         <Link to="/messages"><span role="img" aria-label="messages">💬</span><p>Messages</p></Link>
       </div>

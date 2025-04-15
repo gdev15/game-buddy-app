@@ -1,22 +1,43 @@
 /* Container similar to auth-container */
-.lfg-page {
+/* .lfg-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background-color: #f4f4f9;
     margin-top: 80px;
     margin-bottom: 80px;
+  
+  } */
+  
+  /* Main content area */
+  /* .lfg-content {
+    margin-left: 0;
+    padding: 2rem;
+    padding-top: 80px;
+    height: 100%;
+
+
+  } */
+  /* Container similar to auth-container */
+.lfg-page {
+  max-width: 430px; 
+  width: 100%;
+  margin: 50px auto;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+  
   }
   
   /* Main content area */
   .lfg-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
+    margin-left: 0;
+    padding: 2rem;
+    padding-top: 80px;
+    height: 100%;
+    margin-bottom: 50px;
+
   }
-  
   /* Title section */
   .lfg-content h2 {
     color: #5C02A1;
@@ -28,18 +49,16 @@
     margin-bottom: 1.5rem;
     text-align: center;
     max-width: 500px;
+    text-align: left;
   }
   
   /* Form styling, like auth-box but wider */
   .lfg-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
+    margin-left: 0;
+    background-color: rgb(223, 217, 224);
+    padding: 16px;
+    padding-top: 80px;
+    height: 100%;
   }
   
   .lfg-form input,
@@ -78,11 +97,11 @@
   .lfg-listings {
     margin-top: 3rem;
     width: 100%;
-    max-width: 800px;
+    max-width: 500px;
   }
   
   .lfg-listings h3 {
-    color: #5C02A1;
+    color: #242424;
     margin-bottom: 1rem;
   }
   
@@ -96,10 +115,11 @@
 
   .lfg-card {
     background-color: #fff;
-    padding: 1rem;
+    padding: 5rem;
     margin-bottom: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: 250px !important;
   }
   
   .lfg-card h4 {
@@ -126,6 +146,21 @@
     flex: 1;
     min-width: 150px;
   }
+
+  .lfg-card button{
+    background-color: #5C02A1;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+  }
+
+  .lfg-card button:hover {
+    background-color: #c1abd1;
+  }
   
   /* Responsive design */
   @media (max-width: 600px) {
@@ -136,5 +171,15 @@
     .lfg-content p {
       max-width: 100%;
     }
+  }
+
+  .divider {
+    border-top: 8px solid #40017421;
+  border-radius: 5px;
+  margin: 10px auto;
+  }
+
+  h3 {
+    color: #242424;
   }
   

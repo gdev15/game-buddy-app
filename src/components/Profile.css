@@ -1,4 +1,4 @@
-.profile-page {
+/* .profile-page {
     max-width: 500px;
     margin: 2rem auto;
     background: #fff;
@@ -6,6 +6,15 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     font-family: 'Segoe UI', sans-serif;
+  } */
+
+  .profile-page {
+    max-width: 430px; 
+    width: 100%;
+    margin: 80px auto;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1); 
   }
   
   .profile-page h2 {

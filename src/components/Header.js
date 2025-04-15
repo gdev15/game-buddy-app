@@ -24,10 +24,12 @@ const Header = () => {
           <ul className="menu-links">
             <li><Link to="/Dashboard" onClick={toggleMenu}>Dashboard</Link></li>
             <li><Link to="/profile" onClick={toggleMenu}>Profile</Link></li>
-            <li><Link to="/friends" onClick={toggleMenu}>Friends</Link></li>
-            <li><Link to="/messages" onClick={toggleMenu}>Messages</Link></li>
+            {/* <li><Link to="/friends" onClick={toggleMenu}>Friends</Link></li> */}
+            {/* <li><Link to="/chat/:receiverId" onClick={toggleMenu}>Messages</Link></li> */}
             <li><Link to="/lfg" onClick={toggleMenu}>LFG</Link></li>
             <li><Link to="/myposts" onClick={toggleMenu}>My Posts</Link></li>
+            <li><Link to="/messages" onClick={toggleMenu}>Conversations</Link></li>
+            
           </ul>
         </div>
       )}
