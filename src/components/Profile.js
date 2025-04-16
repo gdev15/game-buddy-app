@@ -22,7 +22,7 @@ const ProfilePage = () => {
   useEffect(() => {
     // Local Run
     //  axios.get(`http://localhost:5000/api/profile/${userId}`)
-    axios.get(`http://game-buddy-app.onrender.com/api/profile/${userId}`)
+    axios.get(`https://game-buddy-app.onrender.com/api/profile/${userId}`)
       .then(res => {
         if (res.data) {
           setProfile({
@@ -53,7 +53,7 @@ const ProfilePage = () => {
     };
     // Local Run
     // axios.post(`http://localhost:5000/api/profile/${userId}`, formattedProfile)
-    axios.post(`http://game-buddy-app.onrender.com/api/profile/${userId}`, formattedProfile)
+    axios.post(`https://game-buddy-app.onrender.com/api/profile/${userId}`, formattedProfile)
       .then(() => setStatusMsg('Profile updated!'))
       .catch(err => {
         console.error(err);

@@ -34,7 +34,7 @@ const LfgPage = () => {
     if (userId) {
       // Local Run
       // fetch(`http://localhost:5000/api/profile/${userId}`)
-      fetch(`http://game-buddy-app.onrender.com/api/profile/${userId}`)
+      fetch(`https://game-buddy-app.onrender.com/api/profile/${userId}`)
         .then(res => res.json())
         .then(data => {
           if (data?.username) {
@@ -56,7 +56,7 @@ const LfgPage = () => {
     try {
       // Local Run
       // const res = await fetch('http://localhost:5000/api/lfg');
-      const res = await fetch('http://game-buddy-app.onrender.com/api/lfg');
+      const res = await fetch('https://game-buddy-app.onrender.com/api/lfg');
       const data = await res.json();
       setLfgPosts(data);
     } catch (error) {
@@ -77,7 +77,7 @@ const LfgPage = () => {
     try {
       // Local Run
       // const response = await fetch('http://localhost:5000/api/lfg', {
-        const response = await fetch('http://game-buddy-app.onrender.com/api/lfg', {
+        const response = await fetch('https://game-buddy-app.onrender.com/api/lfg', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -114,7 +114,7 @@ const LfgPage = () => {
     try {
       // Local Run
       // const response = await fetch(`http://localhost:5000/api/lfg/${postId}/request`, {
-      const response = await fetch(`http://game-buddy-app.onrender.com/api/lfg/${postId}/request`, {
+      const response = await fetch(`https://game-buddy-app.onrender.com/api/lfg/${postId}/request`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
