@@ -4,10 +4,17 @@ import Footer from './Footer';
 import { auth } from '../firebase';
 import { Link } from 'react-router-dom';
 import './MessagesPage.css';
+// URL Config
+import {API_BASE_URL} from '../config';
 
 const MessagesPage = () => {
   const [userId, setUserId] = useState('');
   const [conversations, setConversations] = useState([]);
+
+    // Scroll to top on mount
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -18,24 +25,16 @@ const MessagesPage = () => {
 
   useEffect(() => {
     if (userId) {
-      // Local Run
-      // fetch(`http://localhost:5000/api/messages/conversations/${userId}`)
-
-      fetch(`https://game-buddy-app.onrender.com/api/messages/conversations/${userId}`)
+      fetch(`${API_BASE_URL}/api/messages/conversations/${userId}`)
         .then(res => res.json())
         .then(async (uids) => {
           const convoData = await Promise.all(
             uids.map(async (otherUserId) => {
               try {
-                // Local Run
-                //  const usernameRes = await fetch(`http://localhost:5000/api/profile/user/${otherUserId}`);
-                const usernameRes = await fetch(`https://game-buddy-app.onrender.com/api/profile/user/${otherUserId}`);
+                const usernameRes = await fetch(`${API_BASE_URL}/api/profile/user/${otherUserId}`);
                 const usernameData = await usernameRes.json();
 
-                // Local Run
-                //const lastMsgRes = await fetch(`http://localhost:5000/api/messages/${userId}/${otherUserId}`);
-
-                const lastMsgRes = await fetch(`https://game-buddy-app.onrender.com/api/messages/${userId}/${otherUserId}`);
+                const lastMsgRes = await fetch(`${API_BASE_URL}/api/messages/${userId}/${otherUserId}`);
                 const messages = await lastMsgRes.json();
                 const latestMessage = messages.length > 0 ? messages[messages.length - 1].message : 'No messages yet.';
 

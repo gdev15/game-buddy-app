@@ -1,8 +1,17 @@
-.messages-page {
+/* .messages-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background-color: #f4f4f9;
     margin-top: 80px;
     margin-bottom: 80px;
+} */
+
+.messages-page{
+    max-width: 430px; 
+    width: 100%;
+    margin: 80px auto;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1); 
 }

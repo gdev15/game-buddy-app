@@ -35,8 +35,11 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+
 // GET: Fetch all LFG posts
 router.get('/', async (req, res) => {
+  await LfgPost.deleteMany({ expiresAt: { $lte: new Date() } });
   try {
     const posts = await LfgPost.find().sort({ createdAt: -1 });
     res.json(posts);
@@ -122,6 +125,15 @@ router.get('/user/:userId', async (req, res) => {
   } catch (err) {
     console.error('Error fetching user posts:', err);
     res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    await LfgPost.findByIdAndDelete(req.params.id);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete post' });
   }
 });
 

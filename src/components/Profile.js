@@ -4,6 +4,9 @@ import './Profile.css';
 import Header from './Header';
 import Footer from './Footer';
 
+// URL Config
+import {API_BASE_URL} from '../config';
+
 import { auth } from '../firebase';
 
 const ProfilePage = () => {
@@ -20,9 +23,8 @@ const ProfilePage = () => {
 
   // Fetch existing profile data
   useEffect(() => {
-    // Local Run
-    //  axios.get(`http://localhost:5000/api/profile/${userId}`)
-    axios.get(`https://game-buddy-app.onrender.com/api/profile/${userId}`)
+
+    axios.get(`${API_BASE_URL}/api/profile/${userId}`)
       .then(res => {
         if (res.data) {
           setProfile({
@@ -51,9 +53,7 @@ const ProfilePage = () => {
       ...profile,
       favoriteGames: profile.favoriteGames.split(',').map(game => game.trim())
     };
-    // Local Run
-    // axios.post(`http://localhost:5000/api/profile/${userId}`, formattedProfile)
-    axios.post(`https://game-buddy-app.onrender.com/api/profile/${userId}`, formattedProfile)
+    axios.post(`${API_BASE_URL}/api/profile/${userId}`, formattedProfile)
       .then(() => setStatusMsg('Profile updated!'))
       .catch(err => {
         console.error(err);

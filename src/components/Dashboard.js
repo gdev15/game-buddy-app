@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import { auth } from '../firebase';
+// URL Config
+import {API_BASE_URL} from '../config';
+
+import lfg_image from '../assets/images/lfg_image.png';
+import message_icon from '../assets/images/message_icon.png';
 
 const Dashboard = () => {
-  const [totalUsers, setTotalUsers] = useState(0);
+  // const [totalUsers, setTotalUsers] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
   const [messageCount, setMessageCount] = useState(0);
   const [userId, setUserId] = useState('');
@@ -22,27 +27,23 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    // ✅ Total users from MongoDB
-    // Local Run
-    //fetch('http://localhost:5000/api/profile/count/all')
-    fetch('https://game-buddy-app.onrender.com/api/profile/count/all')
-      .then(res => res.json())
-      .then(data => setTotalUsers(data.count))
-      .catch(err => console.error('Error fetching users:', err));
+    // Total users from MongoDB
 
-    // ✅ Total LFG posts
-    // Local Run
-    //  fetch('http://localhost:5000/api/lfg')
-    fetch('https://game-buddy-app.onrender.com/api/lfg')
+    // fetch(`${API_BASE_URL}/api/profile/count/all`)
+    //   .then(res => res.json())
+    //   .then(data => setTotalUsers(data.count))
+    //   .catch(err => console.error('Error fetching users:', err));
+
+    // Total LFG posts
+
+    fetch(`${API_BASE_URL}/api/lfg`)
       .then(res => res.json())
       .then(data => setTotalPosts(data.length))
       .catch(err => console.error('Error fetching posts:', err));
 
-    // ✅ Total messages for this user
+    // Total messages for this user
     if (userId) {
-      // Local Run
-      // fetch(`http://localhost:5000/api/messages/conversations/${userId}`)
-      fetch(`https://game-buddy-app.onrender.com/api/messages/conversations/${userId}`)
+      fetch(`${API_BASE_URL}/api/messages/conversations/${userId}`)
         .then(res => res.json())
         .then(data => setMessageCount(data.length))
         .catch(err => console.error('Error fetching messages:', err));
@@ -61,21 +62,21 @@ const Dashboard = () => {
         </section>
 
         <section className="dashboard-cards">
-          <div className="card">
+          {/* <div className="card">
             <h3>Active Players</h3>
             <p>{totalUsers}</p>
-          </div>
+          </div> */}
           <Link to="/lfg" className="card-links">
           <div className="card">
            
-            <h3>Open LFG Posts</h3>
-            <p>{totalPosts}</p>
+            <h3>Check Open LFG Posts <span><p className="bubble-text">{totalPosts}</p></span></h3>
+            <img className="icons" src={lfg_image} alt="icon" />
           </div>
           </Link>
           <Link to="/messages" className="card-links">
           <div className="card">
-            <h3>Messages</h3>
-            <p>{messageCount}</p>
+            <h3>Check Messages<span><p className="bubble-text">{messageCount}</p></span></h3>
+            <img className="icons" src={message_icon} alt="icon" />       
           </div>
           </Link>
         </section>

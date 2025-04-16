@@ -4,6 +4,10 @@ import Footer from './Footer';
 import { auth } from '../firebase';
 import "./MyPostsPage.css"
 import { Link } from 'react-router-dom';
+// URL Config
+import {API_BASE_URL} from '../config';
+
+
 
 const MyPostsPage = () => {
   const [userId, setUserId] = useState('');
@@ -20,9 +24,7 @@ const MyPostsPage = () => {
   // Fetch posts for this user
   useEffect(() => {
     if (userId) {
-      // Local Run
-      //  fetch(`http://localhost:5000/api/lfg/user/${userId}`)
-      fetch(`https://game-buddy-app.onrender.com/api/lfg/user/${userId}`)
+      fetch(`${API_BASE_URL}/api/lfg/user/${userId}`)
         .then(res => res.json())
         .then(data => setMyPosts(data))
         .catch(err => console.error('Error loading posts:', err));
@@ -33,10 +35,7 @@ const MyPostsPage = () => {
   const handleResponse = async (postId, requestUserId, status) => {
     try {
       const res = await fetch(
-
-        //Local Run
-        //`http://localhost:5000/api/lfg/${postId}/request/${requestUserId}/response`,
-        `https://game-buddy-app.onrender.com/api/lfg/${postId}/request/${requestUserId}/response`,
+        `${API_BASE_URL}/api/lfg/${postId}/request/${requestUserId}/response`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -47,9 +46,7 @@ const MyPostsPage = () => {
       if (!res.ok) throw new Error('Failed to update request status');
 
       // Refresh posts
-      // Local Run
-      //  const updatedRes = await fetch(`http://localhost:5000/api/lfg/user/${userId}`);
-      const updatedRes = await fetch(`https://game-buddy-app.onrender.com/api/lfg/user/${userId}`);
+      const updatedRes = await fetch(`${API_BASE_URL}/api/lfg/user/${userId}`);
       
       const newData = await updatedRes.json();
       setMyPosts(newData);
@@ -57,6 +54,21 @@ const MyPostsPage = () => {
       console.error(err);
       alert('Error updating request');
     }
+  };
+
+  const handleDelete = async (postId) => {
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    try {
+      await fetch(`${API_BASE_URL}/api/lfg/${postId}`, { method: 'DELETE' });
+      setMyPosts((prev) => prev.filter(p => p._id !== postId));
+    } catch (err) {
+      alert("Error deleting post.");
+    }
+  };
+  
+  const handleEdit = (post) => {
+    // Optional: Open a modal or populate form fields if you’re building an inline edit
+    alert("Edit functionality to be implemented.");
   };
 
   return (
@@ -79,9 +91,11 @@ const MyPostsPage = () => {
                 <p><strong>Availability:</strong> {post.availability}</p>
                 <p><em>{post.description}</em></p>
 
-                {/* ✅ Accepted Users */}
+                {/* Accepted Users */}
                 {acceptedRequests.length > 0 && (
                   <div className="accepted-users">
+                    <p><strong>Created:</strong> {new Date(post.createdAt).toLocaleDateString()}</p>
+                    <p><strong>Expires:</strong> {new Date(post.expiresAt).toLocaleDateString()}</p>
                     <h4 >Accepted Members:</h4>
                     <ul>
                       {acceptedRequests.map((acc, idx) => (
@@ -93,12 +107,17 @@ const MyPostsPage = () => {
                             <button>Message</button>
                           </Link>
                         </li>
+                        
                       ))}
+                      <br></br>            
                     </ul>
+              
                   </div>
                 )}
-
-                {/* 🔁 Join Requests Section */}
+                
+                <button onClick={() => handleDelete(post._id)}>Delete</button>
+                {/* <button onClick={() => handleEdit(post)}>Edit</button> */}
+                {/* Join Requests Section */}
                 {pendingRequests.length > 0 ? (
                   <div className="requests-section">
                     <h4>Pending Join Requests</h4>
@@ -111,6 +130,7 @@ const MyPostsPage = () => {
                       </div>
                     ))}
                   </div>
+                  
                 ) : (
                   <p>No pending requests.</p>
                 )}

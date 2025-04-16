@@ -15,9 +15,11 @@
     background-color: #f9f9f9;
     min-height: 100vh;
     box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+   
   }
   
   .profile-page h2 {
+    padding: 16px;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
     font-weight: 600;
@@ -26,6 +28,7 @@
   }
   
   .profile-page form {
+    padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;

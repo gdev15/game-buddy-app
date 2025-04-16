@@ -4,6 +4,8 @@ import Header from './Header';
 import Footer from './Footer';
 import { auth } from '../firebase';
 import './ChatPage.css';
+// URL Config
+import {API_BASE_URL} from '../config';
 
 const ChatPage = () => {
   const { recipientId } = useParams();
@@ -31,9 +33,7 @@ const ChatPage = () => {
 
   const fetchMessages = async () => {
     try {
-      // Local Run
-      // const res = await fetch(`http://localhost:5000/api/messages/${userId}/${recipientId}`);
-      const res = await fetch(`https://game-buddy-app.onrender.com/api/messages/${userId}/${recipientId}`);
+      const res = await fetch(`${API_BASE_URL}/api/messages/${userId}/${recipientId}`);
       const data = await res.json();
       setMessages(data);
 
@@ -51,9 +51,7 @@ const ChatPage = () => {
 
   const fetchRecipientName = async () => {
     try {
-      // Local Run
-      // const res = await fetch(`http://localhost:5000/api/profile/user/${recipientId}`);
-      const res = await fetch(`https://game-buddy-app.onrender.com/api/profile/user/${recipientId}`);
+      const res = await fetch(`${API_BASE_URL}/api/profile/user/${recipientId}`);
       const data = await res.json();
       setRecipientName(data.username || 'Unknown');
     } catch (err) {
@@ -66,9 +64,7 @@ const ChatPage = () => {
     if (!newMessage.trim()) return;
 
     try {
-      // Local Run
-      // const res = await fetch('http://localhost:5000/api/messages', {
-      const res = await fetch('https://game-buddy-app.onrender.com/api/messages', {
+      const res = await fetch(`${API_BASE_URL}/api/messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

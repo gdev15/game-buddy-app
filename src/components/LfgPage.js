@@ -3,8 +3,16 @@ import './LfgPage.css';
 import Header from './Header';
 import Footer from './Footer';
 import { auth } from '../firebase';
+// URL Config
+import {API_BASE_URL} from '../config';
+
 
 const LfgPage = () => {
+    // Scroll to top on mount
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+    
   const [formData, setFormData] = useState({
     game: '',
     platform: '',
@@ -32,9 +40,7 @@ const LfgPage = () => {
   // Fetch username from MongoDB after userId is set
   useEffect(() => {
     if (userId) {
-      // Local Run
-      // fetch(`http://localhost:5000/api/profile/${userId}`)
-      fetch(`https://game-buddy-app.onrender.com/api/profile/${userId}`)
+      fetch(`${API_BASE_URL}/api/profile/${userId}`)
         .then(res => res.json())
         .then(data => {
           if (data?.username) {
@@ -54,9 +60,7 @@ const LfgPage = () => {
 
   const fetchPosts = async () => {
     try {
-      // Local Run
-      // const res = await fetch('http://localhost:5000/api/lfg');
-      const res = await fetch('https://game-buddy-app.onrender.com/api/lfg');
+      const res = await fetch(`${API_BASE_URL}/api/lfg`);
       const data = await res.json();
       setLfgPosts(data);
     } catch (error) {
@@ -75,9 +79,7 @@ const LfgPage = () => {
     e.preventDefault();
 
     try {
-      // Local Run
-      // const response = await fetch('http://localhost:5000/api/lfg', {
-        const response = await fetch('https://game-buddy-app.onrender.com/api/lfg', {
+        const response = await fetch(`${API_BASE_URL}/api/lfg`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -112,9 +114,7 @@ const LfgPage = () => {
 
   const handleRequestToJoin = async (postId) => {
     try {
-      // Local Run
-      // const response = await fetch(`http://localhost:5000/api/lfg/${postId}/request`, {
-      const response = await fetch(`https://game-buddy-app.onrender.com/api/lfg/${postId}/request`, {
+      const response = await fetch(`${API_BASE_URL}/api/lfg/${postId}/request`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
