@@ -18,7 +18,9 @@ const MessagesPage = () => {
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:5000/api/messages/conversations/${userId}`)
+      //Local Run
+      //fetch(`http://localhost:5000/api/messages/conversations/${userId}`)
+      fetch(`http://game-buddy-app:10000/api/messages/conversations/${userId}`)
         .then(res => res.json())
         .then(data => setConversations(data))
         .catch(err => console.error('Error fetching conversations:', err));

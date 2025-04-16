@@ -32,7 +32,9 @@ const LfgPage = () => {
   // Fetch username from MongoDB after userId is set
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:5000/api/profile/${userId}`)
+      // Local Run
+      // fetch(`http://localhost:5000/api/profile/${userId}`)
+      fetch(`http://game-buddy-app:10000/api/profile/${userId}`)
         .then(res => res.json())
         .then(data => {
           if (data?.username) {
@@ -52,7 +54,9 @@ const LfgPage = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/lfg');
+      // Local Run
+      // const res = await fetch('http://localhost:5000/api/lfg');
+      const res = await fetch('http://game-buddy-app:10000/api/lfg');
       const data = await res.json();
       setLfgPosts(data);
     } catch (error) {
@@ -71,7 +75,9 @@ const LfgPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/lfg', {
+      // Local Run
+      // const response = await fetch('http://localhost:5000/api/lfg', {
+        const response = await fetch('http://game-buddy-app:10000/api/lfg', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -106,7 +112,9 @@ const LfgPage = () => {
 
   const handleRequestToJoin = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/lfg/${postId}/request`, {
+      // Local Run
+      // const response = await fetch(`http://localhost:5000/api/lfg/${postId}/request`, {
+      const response = await fetch(`http://game-buddy-app:10000/api/lfg/${postId}/request`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

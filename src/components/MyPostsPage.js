@@ -20,7 +20,9 @@ const MyPostsPage = () => {
   // Fetch posts for this user
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:5000/api/lfg/user/${userId}`)
+      // Local Run
+      //  fetch(`http://localhost:5000/api/lfg/user/${userId}`)
+      fetch(`http://game-buddy-app:10000/api/lfg/user/${userId}`)
         .then(res => res.json())
         .then(data => setMyPosts(data))
         .catch(err => console.error('Error loading posts:', err));
@@ -31,7 +33,10 @@ const MyPostsPage = () => {
   const handleResponse = async (postId, requestUserId, status) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lfg/${postId}/request/${requestUserId}/response`,
+
+        //Local Run
+        //`http://localhost:5000/api/lfg/${postId}/request/${requestUserId}/response`,
+        `http://game-buddy-app:10000/api/lfg/${postId}/request/${requestUserId}/response`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -42,7 +47,10 @@ const MyPostsPage = () => {
       if (!res.ok) throw new Error('Failed to update request status');
 
       // Refresh posts
-      const updatedRes = await fetch(`http://localhost:5000/api/lfg/user/${userId}`);
+      // Local Run
+      //  const updatedRes = await fetch(`http://localhost:5000/api/lfg/user/${userId}`);
+      const updatedRes = await fetch(`http://game-buddy-app:10000/api/lfg/user/${userId}`);
+      
       const newData = await updatedRes.json();
       setMyPosts(newData);
     } catch (err) {

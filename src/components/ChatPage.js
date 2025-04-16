@@ -31,7 +31,9 @@ const ChatPage = () => {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/messages/${userId}/${recipientId}`);
+      // Local Run
+      // const res = await fetch(`http://localhost:5000/api/messages/${userId}/${recipientId}`);
+      const res = await fetch(`http://game-buddy-app:10000/api/messages/${userId}/${recipientId}`);
       const data = await res.json();
       setMessages(data);
 
@@ -49,7 +51,9 @@ const ChatPage = () => {
 
   const fetchRecipientName = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/profile/user/${recipientId}`);
+      // Local Run
+      // const res = await fetch(`http://localhost:5000/api/profile/user/${recipientId}`);
+      const res = await fetch(`http://game-buddy-app:10000/api/profile/user/${recipientId}`);
       const data = await res.json();
       setRecipientName(data.username || 'Unknown');
     } catch (err) {
@@ -62,7 +66,9 @@ const ChatPage = () => {
     if (!newMessage.trim()) return;
 
     try {
-      const res = await fetch('http://localhost:5000/api/messages', {
+      // Local Run
+      // const res = await fetch('http://localhost:5000/api/messages', {
+      const res = await fetch('http://game-buddy-app:10000/api/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

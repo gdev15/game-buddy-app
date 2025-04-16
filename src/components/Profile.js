@@ -20,7 +20,9 @@ const ProfilePage = () => {
 
   // Fetch existing profile data
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/profile/${userId}`)
+    // Local Run
+    //  axios.get(`http://localhost:5000/api/profile/${userId}`)
+    axios.get(`http://game-buddy-app:10000/api/profile/${userId}`)
       .then(res => {
         if (res.data) {
           setProfile({
@@ -49,8 +51,9 @@ const ProfilePage = () => {
       ...profile,
       favoriteGames: profile.favoriteGames.split(',').map(game => game.trim())
     };
-
-    axios.post(`http://localhost:5000/api/profile/${userId}`, formattedProfile)
+    // Local Run
+    // axios.post(`http://localhost:5000/api/profile/${userId}`, formattedProfile)
+    axios.post(`http://game-buddy-app:10000/api/profile/${userId}`, formattedProfile)
       .then(() => setStatusMsg('Profile updated!'))
       .catch(err => {
         console.error(err);

@@ -23,20 +23,26 @@ const Dashboard = () => {
 
   useEffect(() => {
     // ✅ Total users from MongoDB
-    fetch('http://localhost:5000/api/profile/count/all')
+    // Local Run
+    //fetch('http://localhost:5000/api/profile/count/all')
+    fetch('http://game-buddy-app:10000/api/profile/count/all')
       .then(res => res.json())
       .then(data => setTotalUsers(data.count))
       .catch(err => console.error('Error fetching users:', err));
 
     // ✅ Total LFG posts
-    fetch('http://localhost:5000/api/lfg')
+    // Local Run
+    //  fetch('http://localhost:5000/api/lfg')
+    fetch('http://game-buddy-app:10000/api/lfg')
       .then(res => res.json())
       .then(data => setTotalPosts(data.length))
       .catch(err => console.error('Error fetching posts:', err));
 
     // ✅ Total messages for this user
     if (userId) {
-      fetch(`http://localhost:5000/api/messages/conversations/${userId}`)
+      // Local Run
+      // fetch(`http://localhost:5000/api/messages/conversations/${userId}`)
+      fetch(`http://game-buddy-app:10000/api/messages/conversations/${userId}`)
         .then(res => res.json())
         .then(data => setMessageCount(data.length))
         .catch(err => console.error('Error fetching messages:', err));

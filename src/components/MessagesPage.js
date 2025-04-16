@@ -18,16 +18,24 @@ const MessagesPage = () => {
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://localhost:5000/api/messages/conversations/${userId}`)
+      // Local Run
+      // fetch(`http://localhost:5000/api/messages/conversations/${userId}`)
+
+      fetch(`http://game-buddy-app:10000/api/messages/conversations/${userId}`)
         .then(res => res.json())
         .then(async (uids) => {
           const convoData = await Promise.all(
             uids.map(async (otherUserId) => {
               try {
-                const usernameRes = await fetch(`http://localhost:5000/api/profile/user/${otherUserId}`);
+                // Local Run
+                //  const usernameRes = await fetch(`http://localhost:5000/api/profile/user/${otherUserId}`);
+                const usernameRes = await fetch(`http://game-buddy-app:10000/api/profile/user/${otherUserId}`);
                 const usernameData = await usernameRes.json();
 
-                const lastMsgRes = await fetch(`http://localhost:5000/api/messages/${userId}/${otherUserId}`);
+                // Local Run
+                //const lastMsgRes = await fetch(`http://localhost:5000/api/messages/${userId}/${otherUserId}`);
+
+                const lastMsgRes = await fetch(`http://game-buddy-app:10000/api/messages/${userId}/${otherUserId}`);
                 const messages = await lastMsgRes.json();
                 const latestMessage = messages.length > 0 ? messages[messages.length - 1].message : 'No messages yet.';
 
