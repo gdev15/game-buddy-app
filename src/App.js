@@ -9,6 +9,7 @@ import LfgPage from './components/LfgPage';
 import MyPostsPage from './components/MyPostsPage';
 import ChatPage from './components/ChatPage';
 import MessagesPage from './components/MessagesPage';
+import ResetPassword from './components/ResetPassword';
 
 import { useParams } from 'react-router-dom';
 const ChatPageWrapper = () => {
@@ -32,6 +33,7 @@ const App = () => {
         {/* <Route path="/chat/:receiverId" element={<ChatPageWrapper />} /> */}
         <Route path="/messages" element={<MessagesPage />} />
         <Route path="/messages/:recipientId" element={<ChatPage />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </Router>
   );

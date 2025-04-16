@@ -74,11 +74,13 @@ const MyPostsPage = () => {
                 {/* ✅ Accepted Users */}
                 {acceptedRequests.length > 0 && (
                   <div className="accepted-users">
-                    <strong>Accepted Members:</strong>
+                    <h4 >Accepted Members:</h4>
                     <ul>
                       {acceptedRequests.map((acc, idx) => (
                         <li key={idx}>
-                          {acc.username}{' '}
+                          <br></br>
+                          <p><strong>{acc.username}{' '}</strong> </p>
+                          <br></br>
                           <Link to={`/messages/${acc.userId}`}>
                             <button>Message</button>
                           </Link>
@@ -95,6 +97,7 @@ const MyPostsPage = () => {
                     {pendingRequests.map((req, index) => (
                       <div key={index} className="request">
                         <p><strong>{req.username}</strong></p>
+                        <br></br>
                         <button onClick={() => handleResponse(post._id, req.userId, 'accepted')}>Accept</button>
                         <button onClick={() => handleResponse(post._id, req.userId, 'rejected')}>Reject</button>
                       </div>

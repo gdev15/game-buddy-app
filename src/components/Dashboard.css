@@ -2,7 +2,7 @@
 .dashboard {
   max-width: 430px; 
   width: 100%;
-  margin: 0 auto;
+  margin: 50px auto;
   background-color: #f9f9f9;
   min-height: 100vh;
   box-shadow: 0 0 20px rgba(0,0,0,0.1); 
