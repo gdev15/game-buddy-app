@@ -22,7 +22,7 @@ const MyPostsPage = () => {
     if (userId) {
       // Local Run
       //  fetch(`http://localhost:5000/api/lfg/user/${userId}`)
-      fetch(`http://game-buddy-app:10000/api/lfg/user/${userId}`)
+      fetch(`http://game-buddy-app.onrender.com/api/lfg/user/${userId}`)
         .then(res => res.json())
         .then(data => setMyPosts(data))
         .catch(err => console.error('Error loading posts:', err));
@@ -36,7 +36,7 @@ const MyPostsPage = () => {
 
         //Local Run
         //`http://localhost:5000/api/lfg/${postId}/request/${requestUserId}/response`,
-        `http://game-buddy-app:10000/api/lfg/${postId}/request/${requestUserId}/response`,
+        `http://game-buddy-app.onrender.com/api/lfg/${postId}/request/${requestUserId}/response`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -49,7 +49,7 @@ const MyPostsPage = () => {
       // Refresh posts
       // Local Run
       //  const updatedRes = await fetch(`http://localhost:5000/api/lfg/user/${userId}`);
-      const updatedRes = await fetch(`http://game-buddy-app:10000/api/lfg/user/${userId}`);
+      const updatedRes = await fetch(`http://game-buddy-app.onrender.com/api/lfg/user/${userId}`);
       
       const newData = await updatedRes.json();
       setMyPosts(newData);
