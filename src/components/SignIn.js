@@ -28,12 +28,6 @@ const SignIn = () => {
     <div className="auth-container">
       <div className="auth-box">
         <h2>Welcome to Gaming Buddy!</h2>
-        <h2>Test User Accounts:</h2>
-        <h4>User: NightOwl@test.com</h4>
-        <h4>Password: QfZ9!_UOP</h4>
-        <h4>User: TurboGamer@test.com</h4>
-        <h4>Password: FqP!9Z*_OP</h4>
-        <br></br>
         <h3>Sign Up / Log In</h3>
         <p>To access all the features</p>
         <form onSubmit={handleSignIn}>
