@@ -10,8 +10,13 @@
 .messages-page{
     max-width: 430px; 
     width: 100%;
-    margin: 80px auto;
+    margin: 0px auto;
     background-color: #f9f9f9;
     min-height: 100vh;
     box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+}
+
+.content {
+    display:flex;
+    margin-top: 50px;
 }

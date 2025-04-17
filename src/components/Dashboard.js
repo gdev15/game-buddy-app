@@ -10,11 +10,15 @@ import {API_BASE_URL} from '../config';
 import lfg_image from '../assets/images/lfg_image.png';
 import message_icon from '../assets/images/message_icon.png';
 
+
+
 const Dashboard = () => {
+
   // const [totalUsers, setTotalUsers] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
   const [messageCount, setMessageCount] = useState(0);
   const [userId, setUserId] = useState('');
+  window.scrollTo(0, 0);
 
   // Get logged-in user ID
   useEffect(() => {
@@ -70,13 +74,13 @@ const Dashboard = () => {
           <div className="card">
            
             <h3>Check Open LFG Posts <span><p className="bubble-text">{totalPosts}</p></span></h3>
-            <img className="icons" src={lfg_image} alt="icon" />
+            <img className="icon-lfg" src={lfg_image} alt="icon" />
           </div>
           </Link>
           <Link to="/messages" className="card-links">
           <div className="card">
             <h3>Check Messages<span><p className="bubble-text">{messageCount}</p></span></h3>
-            <img className="icons" src={message_icon} alt="icon" />       
+            <img className="icon-message" src={message_icon} alt="icon" />       
           </div>
           </Link>
         </section>

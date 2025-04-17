@@ -46,3 +46,9 @@
   .logout-button:hover {
     color: #ff6b6b;
   }
+
+  .menu-links a.active {
+    color: #00bcd4;
+    font-weight: bold;
+    text-decoration: underline;
+  }

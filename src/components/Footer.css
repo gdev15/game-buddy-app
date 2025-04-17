@@ -11,14 +11,23 @@
     align-items: center;
     padding: 0.5rem 0;
     z-index: 1000;
+    border-top: solid white;
 
   }
   
   .footer-item {
     display: flex;
     flex-direction: column;
+    contain: content;
     align-items: center;
     font-size: 0.8rem;
+    /* background-color: rgb(211, 211, 211); */
+    /* background-color: #7e678f;
+    width: 55px;
+    height: 55px; */
+    /* padding: 8px; */
+    /* border-radius: 10px; */
+    /* box-shadow: 11px 14px 8px -8px rgba(0, 0, 0, 0.75); */
   }
   
   .footer-item span {
@@ -27,7 +36,7 @@
   }
   
   .footer-item a {
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     text-align: center;
     transition: color 0.2s;
@@ -36,3 +45,49 @@
   .footer-item a:hover {
     color: #00bcd4;
   }
+
+  .icon-profile {
+    width: 30px;
+  
+  }
+
+  .lfg-bottom-icon {
+    width: 42px;
+    margin-bottom: 1px;
+  }
+
+  
+  .footer-item p {
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    margin-top: -4px;
+  }
+
+  .message-bottom-icon {
+    width: 42px;
+    margin-bottom: 8px;
+  }
+
+  .home-icon {
+    width: 38px;
+    margin-bottom: 8px;
+  }
+
+  .lfg-post-icon {
+    width: 30px;
+  }
+
+.footer-item.active p {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+
+.footer-item.active img {
+  background-color: rgb(232, 214, 255);
+  padding: 4px;
+  border-radius: 10px;
+  /* filter: brightness(0) saturate(100%) invert(47%) sepia(70%) saturate(564%) hue-rotate(145deg) brightness(94%) contrast(91%); */
+}
+

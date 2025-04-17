@@ -22,11 +22,11 @@
 .lfg-page {
   max-width: 430px; 
   width: 100%;
-  margin: 50px auto;
+  margin: 0px auto;
   background-color: #f9f9f9;
   min-height: 100vh;
   box-shadow: 0 0 20px rgba(0,0,0,0.1); 
-  
+  margin-bottom: 100px;
   }
   
   /* Main content area */
@@ -35,8 +35,6 @@
     padding: 2rem;
     padding-top: 80px;
     height: 100%;
-    margin-bottom: 50px;
-
   }
   /* Title section */
   .lfg-content h2 {
@@ -182,4 +180,5 @@
   h3 {
     color: #242424;
   }
+  
   

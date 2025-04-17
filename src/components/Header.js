@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
-import './Header.css'; // optional if you split styling
+import './Header.css';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,6 +12,8 @@ const Header = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const navigate = useNavigate();
+
+    const location = useLocation();
 
 const handleLogout = async () => {
   try {
@@ -21,6 +23,8 @@ const handleLogout = async () => {
     console.error('Error signing out:', error);
   }
 };
+
+const isActive = (path) => location.pathname === path;
 
   return (
     <>
@@ -38,13 +42,14 @@ const handleLogout = async () => {
         <div className="menu-overlay">
           <div className="close-icon" onClick={toggleMenu}>✕</div>
           <ul className="menu-links">
-            <li><Link to="/Dashboard" onClick={toggleMenu}>Dashboard</Link></li>
-            <li><Link to="/profile" onClick={toggleMenu}>Profile</Link></li>
+            <li><Link to="/dashboard" className={isActive('/dashboard') ? 'active' : ''}  onClick={toggleMenu}>Home</Link></li>
+           
             {/* <li><Link to="/friends" onClick={toggleMenu}>Friends</Link></li> */}
             {/* <li><Link to="/chat/:receiverId" onClick={toggleMenu}>Messages</Link></li> */}
-            <li><Link to="/lfg" onClick={toggleMenu}>LFG</Link></li>
-            <li><Link to="/myposts" onClick={toggleMenu}>My Posts</Link></li>
-            <li><Link to="/messages" onClick={toggleMenu}>Conversations</Link></li>
+            <li><Link to="/lfg" className={isActive('/lfg') ? 'active' : ''} onClick={toggleMenu}>LFG</Link></li>
+            <li><Link to="/myposts" className={isActive('/myposts') ? 'active' : ''} onClick={toggleMenu}>My Posts</Link></li>
+            <li><Link to="/messages" className={isActive('/messages') ? 'active' : ''} onClick={toggleMenu}>Messages</Link></li>
+            <li><Link to="/profile" className={isActive('/profile') ? 'active' : ''} onClick={toggleMenu}>Profile</Link></li>
             <li> <button className="logout-button" onClick={handleLogout}>Logout</button></li>
             
           </ul>

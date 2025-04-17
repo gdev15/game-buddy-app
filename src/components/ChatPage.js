@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from './Header';
-import Footer from './Footer';
+// import Header from './Header';
+// import Footer from './Footer';
 import { auth } from '../firebase';
 import './ChatPage.css';
+import { Link } from 'react-router-dom';
 // URL Config
 import {API_BASE_URL} from '../config';
+
+import back_icon from "../assets/images/back-icon.png";
 
 const ChatPage = () => {
   const { recipientId } = useParams();
@@ -85,8 +88,18 @@ const ChatPage = () => {
 
   return (
     <div className="chat-page">
-      <Header />
+      {/* <Header /> */}
       <main className="chat-content">
+        <div className ="back-icon-container">
+        <Link to="/messages" >
+          <img className="back-icon" src={back_icon} alt="icon" />
+     
+        </Link> 
+        <Link to="/messages" >
+        <p className="back-icon-text">back to messages</p>
+        </Link>
+        </div>
+  
         <h2>Chat with {recipientName}</h2>
         <div className="chat-box" id="chat-box">
           {messages.length === 0 ? (
@@ -121,7 +134,7 @@ const ChatPage = () => {
           <button onClick={handleSend}>Send</button>
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

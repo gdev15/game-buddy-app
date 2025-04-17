@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const UserProfile = require('../models/UserProfile'); // ✅ Correct model
 
-// ✅ GET total user count - must go first
+// GET total user count - must go first
 router.get('/count/all', async (req, res) => {
   try {
     const count = await UserProfile.countDocuments({});
@@ -13,7 +13,7 @@ router.get('/count/all', async (req, res) => {
   }
 });
 
-// ✅ GET user by UID - should go before :userId
+// GET user by UID - should go before :userId
 router.get('/user/:uid', async (req, res) => {
   try {
     const user = await UserProfile.findOne({ userId: req.params.uid });
@@ -29,7 +29,7 @@ router.get('/user/:uid', async (req, res) => {
   }
 });
 
-// ✅ GET profile by Firebase UID
+// GET profile by Firebase UID
 router.get('/:userId', async (req, res) => {
   try {
     const profile = await UserProfile.findOne({ userId: req.params.userId });
@@ -39,7 +39,7 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
-// ✅ POST or update user profile
+// POST or update user profile
 router.post('/:userId', async (req, res) => {
   const { username, favoriteGames, skillLevel, availability } = req.body;
   try {

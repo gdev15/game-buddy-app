@@ -64,6 +64,7 @@ const MessagesPage = () => {
       <Header />
       
       <main className="content">
+        
         <h2>Messages</h2>
         {conversations.length === 0 ? (
           <p>You have no messages yet.</p>
