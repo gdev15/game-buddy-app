@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// ✅ Place this FIRST so it doesn’t get treated as a userId in the next route
+// Place this FIRST so it doesn’t get treated as a userId in the next route
 router.get('/conversations/:userId', async (req, res) => {
   const userId = req.params.userId;
 

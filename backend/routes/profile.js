@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const UserProfile = require('../models/UserProfile'); // ✅ Correct model
+const UserProfile = require('../models/UserProfile'); // Correct model
 
 // GET total user count - must go first
 router.get('/count/all', async (req, res) => {

@@ -19,7 +19,7 @@ const ChatPageWrapper = () => {
 
 const App = () => {
   return (
-    <BrowserRouter basename="/gamebuddy">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/signin" element={<SignIn />} />
